@@ -3,30 +3,30 @@ import { Character } from '../interfaces/characterInterface';
 
 interface Props {
   character: Character;
+  height?: number;
+  width?: number;
 }
-const CharacterPoster = ({ character }: Props) => {
-  const uri = `${character.thumbnail.path}/landscape_xlarge.${character.thumbnail.extension}`;
+const CharacterPoster = ({ character, height = 310, width = 170 }: Props) => {
+  const uri = `${character.thumbnail.path}/portrait_incredible.${character.thumbnail.extension}`;
 
   return (
-    <View style={styles.container}>
+    <View style={{ ...styles.container, width, height }}>
       <Image source={{ uri }} style={styles.image} />
+      <View style={styles.separator}></View>
       <View style={styles.containerName}>
-        <Text style={styles.name}>{character.name}</Text>
+        <Text numberOfLines={1} style={styles.name}>
+          {character.name}
+        </Text>
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  image: {
-    flex: 1,
-    borderRadius: 18,
-  },
   container: {
-    width: 300,
-    height: 420,
     borderRadius: 18,
     shadowColor: '#000',
+    alignItems: 'center',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -35,25 +35,32 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     elevation: 10,
   },
-  containerName: {
+  image: {
+    flex: 1,
+    borderTopLeftRadius: 18,
+    borderTopRightRadius: 18,
+    resizeMode: 'contain',
     width: '100%',
-    height: 70,
+  },
+  containerName: {
+    width: 170,
+    height: 50,
     backgroundColor: '#000',
-    opacity: 0.8,
-    position: 'absolute',
-    bottom: 0,
     padding: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderBottomLeftRadius: 17,
-    borderBottomRightRadius: 17,
+    borderBottomLeftRadius: 18,
+    borderBottomRightRadius: 18,
   },
   name: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: 'bold',
-    textTransform: 'uppercase',
-    textAlign: 'center',
+    marginBottom: 'auto',
+    marginTop: 'auto',
+  },
+  separator: {
+    width: 170,
+    height: 3,
+    backgroundColor: '#fff',
   },
 });
 

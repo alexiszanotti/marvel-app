@@ -1,4 +1,11 @@
-import { Dimensions, FlatList, StyleSheet, Text, View } from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Carousel from 'react-native-snap-carousel';
 
@@ -17,35 +24,39 @@ export const HomeScreen = () => {
   }
 
   return (
-    <View
-      style={{
-        marginTop: top + 20,
-        rowGap: 10,
-        height: 440,
-        flex: 1,
-      }}
-    >
-      <View style={styles.container}>
-        <Text style={styles.title}>Personajes</Text>
-        <Carousel
-          data={characters}
-          renderItem={({ item }: any) => <CharacterPoster character={item} />}
-          sliderWidth={width}
-          itemWidth={300}
-          vertical={false}
-        />
-      </View>
+    <ScrollView>
+      <View
+        style={{
+          marginTop: top + 20,
+          rowGap: 10,
+          height: 440,
+          flex: 1,
+        }}
+      >
+        <View style={styles.container}>
+          <Text style={styles.title}>Personajes</Text>
+          <Carousel
+            data={characters}
+            renderItem={({ item }: any) => <CharacterPoster character={item} />}
+            sliderWidth={width}
+            itemWidth={170}
+            vertical={false}
+          />
+        </View>
 
-      <View style={styles.container}>
-        <Text style={styles.title}>Comics</Text>
-        <FlatList
-          data={characters}
-          horizontal={true}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }: any) => <CharacterPoster character={item} />}
-        />
+        <View style={styles.container}>
+          <Text style={styles.title}>Comics</Text>
+          <FlatList
+            data={characters}
+            horizontal={true}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }: any) => <CharacterPoster character={item} />}
+            showsHorizontalScrollIndicator={false}
+            ItemSeparatorComponent={() => <View style={{ width: 12 }} />}
+          />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
