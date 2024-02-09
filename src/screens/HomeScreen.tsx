@@ -6,54 +6,50 @@ import {
   Text,
   View,
 } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Carousel from 'react-native-snap-carousel';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-import { useCharacter } from '../hooks/useCharacter';
-import { CharacterPoster, Spinner } from '../components';
+import { useCharacter, useSeries } from '../hooks';
+import { Header, Poster, Spinner } from '../components';
 
 const { width } = Dimensions.get('window');
 
 export const HomeScreen = () => {
-  const { characters, isLoading } = useCharacter();
+  const { characters, loadingCharacters } = useCharacter();
+
+  const { loadginSeries, series } = useSeries();
 
   const { top } = useSafeAreaInsets();
 
-  if (isLoading) {
+  if (loadingCharacters || loadginSeries) {
     return <Spinner />;
   }
 
   return (
-    <ScrollView>
-      <View
-        style={{
-          marginTop: top + 20,
-          rowGap: 10,
-          height: 440,
-          flex: 1,
-        }}
-      >
+    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <View style={{ marginTop: top, flex: 1 }}>
+        <Header />
         <View style={styles.container}>
-          <Text style={styles.title}>Personajes</Text>
-          <Carousel
-            data={characters}
-            renderItem={({ item }: any) => <CharacterPoster character={item} />}
-            sliderWidth={width}
-            itemWidth={170}
-            vertical={false}
-          />
-        </View>
-
-        <View style={styles.container}>
-          <Text style={styles.title}>Comics</Text>
-          <FlatList
-            data={characters}
-            horizontal={true}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={({ item }: any) => <CharacterPoster character={item} />}
-            showsHorizontalScrollIndicator={false}
-            ItemSeparatorComponent={() => <View style={{ width: 12 }} />}
-          />
+          <View>
+            <Text style={styles.title}>Personajes</Text>
+            <Carousel
+              data={characters}
+              renderItem={({ item }: any) => <Poster data={item} />}
+              sliderWidth={width}
+              itemWidth={180}
+              vertical={false}
+            />
+          </View>
+          <View>
+            <Text style={styles.title}>Series</Text>
+            <Carousel
+              data={series}
+              renderItem={({ item }) => <Poster data={item} />}
+              sliderWidth={width}
+              itemWidth={180}
+              vertical={false}
+            />
+          </View>
         </View>
       </View>
     </ScrollView>
@@ -61,7 +57,12 @@ export const HomeScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    rowGap: 20,
+    marginTop: 20,
+  },
   title: {
     padding: 2,
     backgroundColor: '#000',

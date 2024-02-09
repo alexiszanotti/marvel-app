@@ -5,8 +5,16 @@ import {
   HomeScreen,
   ProfileScreen,
 } from '../screens';
+import { Character } from '../interfaces/characterInterface';
 
-const Stack = createStackNavigator();
+export type RootStackParams = {
+  Home: undefined;
+  Detail: Character;
+  Profile: undefined;
+  Comics: undefined;
+};
+
+const Stack = createStackNavigator<RootStackParams>();
 
 export const Navigation = () => {
   return (
@@ -14,14 +22,15 @@ export const Navigation = () => {
       screenOptions={{
         headerShown: false,
         cardStyle: {
-          backgroundColor: 'white',
+          backgroundColor: 'rgba(0,0,0,0.1)',
         },
       }}
+      initialRouteName="Home"
     >
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
-      <Stack.Screen name="DetailScreen" component={DetailScreen} />
-      <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
-      <Stack.Screen name="ComicsScreen" component={ComicsScreen} />
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Detail" component={DetailScreen} />
+      <Stack.Screen name="Profile" component={ProfileScreen} />
+      <Stack.Screen name="Comics" component={ComicsScreen} />
     </Stack.Navigator>
   );
 };

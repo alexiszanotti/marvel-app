@@ -1,4 +1,6 @@
-import CharacterPoster from './CharacterPoster';
+import Poster from './Poster';
 import Spinner from './Spinner';
+import Header from './Header';
+import LogoMarvel from './LogoMarvel';
 
-export { Spinner, CharacterPoster };
+export { Spinner, Poster, Header, LogoMarvel };

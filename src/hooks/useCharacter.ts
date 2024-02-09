@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
-import { Character, CharacterResponse } from '../interfaces/characterInterface';
+import type { Character } from '../interfaces/characterInterface';
 import { apiCharacters } from '../api/apiCharacters';
 
 export const useCharacter = () => {
   const [characters, setCharacters] = useState<Character[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loadingCharacters, setLoadingCharacters] = useState(true);
 
   const getCharacters = async () => {
     const { data } = await apiCharacters();
     setCharacters(data.results);
-    setIsLoading(false);
+    setLoadingCharacters(false);
   };
 
   useEffect(() => {
@@ -18,6 +18,6 @@ export const useCharacter = () => {
 
   return {
     characters,
-    isLoading,
+    loadingCharacters,
   };
 };
