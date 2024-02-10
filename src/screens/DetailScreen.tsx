@@ -5,15 +5,19 @@ import {
   Dimensions,
   Text,
   ScrollView,
+  ActivityIndicator,
+  Pressable,
 } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
+import { AntDesign } from '@expo/vector-icons';
 import { RootStackParams } from '../navigation/Navigation';
+import { CharacterDetail } from '../components';
 
 const screenHeight = Dimensions.get('screen').height;
 
 interface Props extends StackScreenProps<RootStackParams, 'Detail'> {}
 
-export const DetailScreen = ({ route }: Props) => {
+export const DetailScreen = ({ route, navigation }: Props) => {
   const { name, description, thumbnail, id } = route.params;
 
   const uri = `${thumbnail.path}/portrait_incredible.${thumbnail.extension}`;
@@ -24,9 +28,14 @@ export const DetailScreen = ({ route }: Props) => {
         <Image source={{ uri }} style={styles.image} />
       </View>
       <View style={styles.marginContainer}>
-        <Text style={styles.title}>{name}</Text>
-        <Text style={styles.subTitle}>{description}</Text>
+        <View>
+          <CharacterDetail character={route.params} />
+        </View>
       </View>
+
+      <Pressable style={styles.backButton} onPress={() => navigation.goBack()}>
+        <AntDesign name="arrowleft" size={40} color="white" />
+      </Pressable>
     </ScrollView>
   );
 };
@@ -53,13 +62,11 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginTop: 20,
   },
-  subTitle: {
-    fontSize: 20,
-    opacity: 0.8,
-  },
-  title: {
-    marginBottom: 10,
-    fontSize: 20,
-    fontWeight: 'bold',
+  backButton: {
+    position: 'absolute',
+    top: 60,
+    left: 20,
+    width: 50,
+    height: 50,
   },
 });
