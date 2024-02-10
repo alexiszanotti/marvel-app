@@ -3,7 +3,6 @@ import { Navigation } from './src/navigation/Navigation';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native';
 import { Header } from './src/components';
-import FadeScreen from './src/screens/FadeScreen';
 
 export default function App() {
   return (
@@ -15,8 +14,8 @@ export default function App() {
       />
       <StatusBar style="light" />
       <Header />
-      <FadeScreen />
-      {/* <Navigation /> */}
+      {/* <FadeScreen /> */}
+      <Navigation />
     </NavigationContainer>
   );
 }
