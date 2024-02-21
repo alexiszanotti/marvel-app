@@ -9,12 +9,13 @@ const GradientBg = ({ children }: Props) => {
   return (
     <View style={{ flex: 1 }}>
       <LinearGradient
-        colors={['red', 'yellow', 'blue']}
+        colors={['#000', 'transparent']}
         style={{
           ...StyleSheet.absoluteFillObject,
         }}
-        start={{ x: 0.1, y: 0.1 }}
-        end={{ x: 0.5, y: 0.5 }}
+        start={{ x: 0.5, y: 0.1 }}
+        end={{ x: 0.5, y: 0.5 }}      
+        
       />
 
       {children}

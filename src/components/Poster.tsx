@@ -2,6 +2,7 @@ import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import type { Character } from '../interfaces/characterInterface';
 import type { Series } from '../interfaces/seriesInterface';
+import { useFonts } from 'expo-font';
 
 interface Props {
   data: Character | Series;
@@ -10,6 +11,10 @@ interface Props {
 }
 const Poster = ({ data, height = 310, width = 180 }: Props) => {
   const uri = `${data.thumbnail.path}/portrait_incredible.${data.thumbnail.extension}`;
+
+  const [loaded] = useFonts({
+    'Montserrat-Black': require('../../assets/font/Montserrat-Light.ttf'),
+  });
 
   const { navigate } = useNavigation();
   return (
@@ -63,9 +68,9 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 18,
   },
   name: {
-    color: 'white',
+    color: 'red',
     fontSize: 15,
-    fontWeight: 'bold',
+    fontFamily: 'Montserrat-Black',
     marginBottom: 'auto',
     marginTop: 'auto',
   },

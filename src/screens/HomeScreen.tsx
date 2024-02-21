@@ -10,7 +10,7 @@ import Carousel from 'react-native-snap-carousel';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useCharacter, useSeries } from '../hooks';
 import { Poster, GradientBg } from '../components';
-import ImageColors from 'react-native-image-colors';
+import { useFonts } from 'expo-font';
 
 const { width } = Dimensions.get('window');
 
@@ -19,6 +19,10 @@ export const HomeScreen = () => {
   const { loadginSeries, series } = useSeries();
 
   const { top } = useSafeAreaInsets();
+
+  const [loaded] = useFonts({
+    'Montserrat-Black': require('../../assets/font/Montserrat-Black.ttf'),
+  });
 
   if (loadingCharacters || loadginSeries) {
     return <ActivityIndicator size={30} color={'gray'} />;
@@ -36,15 +40,6 @@ export const HomeScreen = () => {
       'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available'
   );
 
-  const getPosterColors = async (index: number) => {
-    const character = filterCharacters[index];
-    const uri = `${character.thumbnail.path}/portrait_incredible.${character.thumbnail.extension}`;
-
-    const colors = await ImageColors.getColors(uri, {});
-
-    console.log(colors);
-  };
-
   return (
     <GradientBg>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -58,7 +53,6 @@ export const HomeScreen = () => {
                 sliderWidth={width}
                 itemWidth={180}
                 vertical={false}
-                onSnapToItem={(index) => getPosterColors(index)}
               />
             </View>
             <View>
@@ -88,11 +82,11 @@ const styles = StyleSheet.create({
   title: {
     padding: 2,
     backgroundColor: '#000',
+    fontFamily: 'Montserrat-Black',
     width: '100%',
     color: 'white',
     textTransform: 'uppercase',
     fontSize: 20,
-    fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 10,
   },

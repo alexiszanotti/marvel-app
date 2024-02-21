@@ -1,4 +1,4 @@
-import Svg, { Path, SvgXml } from 'react-native-svg';
+import { SvgXml } from 'react-native-svg';
 
 const LogoMarvel = () => {
   const markerRendering = `<svg
