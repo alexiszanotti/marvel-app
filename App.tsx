@@ -14,7 +14,6 @@ export default function App() {
       />
       <StatusBar style="light" />
       <Header />
-      {/* <FadeScreen /> */}
       <Navigation />
     </NavigationContainer>
   );

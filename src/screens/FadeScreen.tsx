@@ -1,5 +1,4 @@
-import { useRef } from 'react';
-import { Animated, Button, StyleSheet, View } from 'react-native';
+import { Animated, StyleSheet, View } from 'react-native';
 import { useFade } from '../hooks/useFade';
 
 const FadeScreen = () => {

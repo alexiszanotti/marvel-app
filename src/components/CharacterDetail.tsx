@@ -5,7 +5,7 @@ interface Props {
   character: Character;
 }
 
-const CharacterDetail = ({ character }: Props) => {
+export const CharacterDetail = ({ character }: Props) => {
   const { name, description } = character;
   return (
     <View>
@@ -15,7 +15,6 @@ const CharacterDetail = ({ character }: Props) => {
   );
 };
 
-export default CharacterDetail;
 
 const styles = StyleSheet.create({
   title: {

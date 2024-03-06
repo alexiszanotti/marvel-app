@@ -1,18 +1,18 @@
 import {
   ActivityIndicator,
-  Dimensions,
   ScrollView,
   StyleSheet,
   Text,
   View,
+  useWindowDimensions,
 } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useCharacter, useSeries } from '../hooks';
-import { Poster, GradientBg } from '../components';
 import { useFonts } from 'expo-font';
+import { GradientBg, Poster } from '../components';
 
-const { width } = Dimensions.get('window');
+const { width } = useWindowDimensions();
 
 export const HomeScreen = () => {
   const { characters, loadingCharacters } = useCharacter();
@@ -39,6 +39,10 @@ export const HomeScreen = () => {
       c.thumbnail.path !==
       'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available'
   );
+
+  if (!loaded) {
+    return null;
+  }
 
   return (
     <GradientBg>

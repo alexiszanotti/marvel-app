@@ -1,7 +1,6 @@
-import Poster from './Poster';
-import Header from './Header';
-import LogoMarvel from './LogoMarvel';
-import CharacterDetail from './CharacterDetail';
-import GradientBg from './GradientBg';
+export * from './Poster';
+export * from './Header';
+export * from './LogoMarvel';
+export * from './CharacterDetail';
+export * from './GradientBg';
 
-export { Poster, Header, LogoMarvel, CharacterDetail, GradientBg };

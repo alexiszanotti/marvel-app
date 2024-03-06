@@ -2,18 +2,16 @@ import {
   StyleSheet,
   Image,
   View,
-  Dimensions,
-  Text,
   ScrollView,
-  ActivityIndicator,
   Pressable,
+  useWindowDimensions,
 } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { AntDesign } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { RootStackParams } from '../navigation/Navigation';
 import { CharacterDetail } from '../components';
 
-const screenHeight = Dimensions.get('screen').height;
+const { height: screenHeight } = useWindowDimensions();
 
 interface Props extends StackScreenProps<RootStackParams, 'Detail'> {}
 
@@ -34,7 +32,7 @@ export const DetailScreen = ({ route, navigation }: Props) => {
       </View>
 
       <Pressable style={styles.backButton} onPress={() => navigation.goBack()}>
-        <AntDesign name="arrowleft" size={40} color="white" />
+        <Ionicons name="arrow-back" size={30} color="white" />
       </Pressable>
     </ScrollView>
   );
@@ -68,5 +66,14 @@ const styles = StyleSheet.create({
     left: 20,
     width: 50,
     height: 50,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    borderRadius: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 10,
+    },
   },
 });

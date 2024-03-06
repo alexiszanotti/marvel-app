@@ -5,7 +5,7 @@ interface Props {
   children: JSX.Element | JSX.Element[];
 }
 
-const GradientBg = ({ children }: Props) => {
+export const GradientBg = ({ children }: Props) => {
   return (
     <View style={{ flex: 1 }}>
       <LinearGradient
@@ -14,13 +14,10 @@ const GradientBg = ({ children }: Props) => {
           ...StyleSheet.absoluteFillObject,
         }}
         start={{ x: 0.5, y: 0.1 }}
-        end={{ x: 0.5, y: 0.5 }}      
-        
+        end={{ x: 0.5, y: 0.5 }}
       />
 
       {children}
     </View>
   );
 };
-
-export default GradientBg;
