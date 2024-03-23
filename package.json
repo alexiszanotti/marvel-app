@@ -38,7 +38,7 @@
   "devDependencies": {
     "@babel/core": "7.23.9",
     "@types/md5": "2.3.5",
-    "@types/react-native-snap-carousel": "3.8.10"
+    "@types/react-native-snap-carousel": "^3.8.10"
   },
   "private": true
 }
