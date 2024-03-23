@@ -15,7 +15,6 @@ export const CharacterDetail = ({ character }: Props) => {
   );
 };
 
-
 const styles = StyleSheet.create({
   title: {
     marginBottom: 10,

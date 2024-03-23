@@ -11,12 +11,15 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useCharacter, useSeries } from '../hooks';
 import { useFonts } from 'expo-font';
 import { GradientBg, Poster } from '../components';
-
-const { width } = useWindowDimensions();
+import { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
 
 export const HomeScreen = () => {
   const { characters, loadingCharacters } = useCharacter();
   const { loadginSeries, series } = useSeries();
+  const { width } = useWindowDimensions();
+
+  const { isDark, theme } = useContext(ThemeContext);
 
   const { top } = useSafeAreaInsets();
 

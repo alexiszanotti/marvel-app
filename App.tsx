@@ -1,12 +1,12 @@
-import { NavigationContainer } from '@react-navigation/native';
 import { Navigation } from './src/navigation/Navigation';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView } from 'react-native';
 import { Header } from './src/components';
+import { ThemeContextProvider } from './src/context/ThemeContext';
 
 export default function App() {
   return (
-    <NavigationContainer>
+    <ThemeContextProvider>
       <SafeAreaView
         style={{
           backgroundColor: 'black',
@@ -15,6 +15,6 @@ export default function App() {
       <StatusBar style="light" />
       <Header />
       <Navigation />
-    </NavigationContainer>
+    </ThemeContextProvider>
   );
 }

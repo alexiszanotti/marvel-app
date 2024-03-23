@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
-import { LogoMarvel } from '.';
+import { LogoMarvel } from './LogoMarvel';
 
 export const Header = () => {
   return (
