@@ -1,6 +1,6 @@
 import { SvgXml } from 'react-native-svg';
 
-const LogoMarvel = () => {
+export const LogoMarvel = () => {
   const markerRendering = `<svg
   width="130"
   height="52"
@@ -21,5 +21,3 @@ const LogoMarvel = () => {
 
   return <SvgXml xml={markerRendering} />;
 };
-
-export default LogoMarvel;

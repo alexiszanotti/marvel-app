@@ -1,9 +1,9 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
-import LogoMarvel from './LogoMarvel';
+import { LogoMarvel } from '.';
 
-const Header = () => {
+export const Header = () => {
   return (
     <View style={styles.headerContainer}>
       <View>
@@ -31,5 +31,3 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 });
-
-export default Header;

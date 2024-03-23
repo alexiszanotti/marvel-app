@@ -1,20 +1,27 @@
+import { useCallback } from 'react';
 import { View, Text, Image, StyleSheet, Pressable } from 'react-native';
+
 import { useNavigation } from '@react-navigation/native';
+import { useFonts } from 'expo-font';
+
 import type { Character } from '../interfaces/characterInterface';
 import type { Series } from '../interfaces/seriesInterface';
-import { useFonts } from 'expo-font';
 
 interface Props {
   data: Character | Series;
   height?: number;
   width?: number;
 }
-const Poster = ({ data, height = 310, width = 180 }: Props) => {
+export const Poster = ({ data, height = 310, width = 180 }: Props) => {
   const uri = `${data.thumbnail.path}/portrait_incredible.${data.thumbnail.extension}`;
 
-  const [loaded] = useFonts({
-    'Montserrat-Black': require('../../assets/font/Montserrat-Light.ttf'),
+  const [fontsLoaded, fontError] = useFonts({
+    'Montserrat-Black': require('../../assets/font/Montserrat-Black.ttf'),
   });
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
 
   const { navigate } = useNavigation();
   return (
@@ -68,11 +75,12 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 18,
   },
   name: {
-    color: 'red',
+    color: 'white',
     fontSize: 15,
     fontFamily: 'Montserrat-Black',
     marginBottom: 'auto',
     marginTop: 'auto',
+    opacity: 0.8,
   },
   separator: {
     width: 180,
@@ -80,5 +88,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
 });
-
-export default Poster;
