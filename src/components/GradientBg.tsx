@@ -3,13 +3,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 interface Props {
   children: JSX.Element | JSX.Element[];
+  colors?: string[];
 }
 
-export const GradientBg = ({ children }: Props) => {
+export const GradientBg = ({ children, colors }: Props) => {
   return (
     <View style={{ flex: 1 }}>
       <LinearGradient
-        colors={['#000', 'transparent']}
+        colors={colors || ['transparent']}
         style={{
           ...StyleSheet.absoluteFillObject,
         }}

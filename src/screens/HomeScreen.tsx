@@ -11,15 +11,14 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useCharacter, useSeries } from '../hooks';
 import { useFonts } from 'expo-font';
 import { GradientBg, Poster } from '../components';
-import { useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
+import { useColorsTheme } from '../hooks/useColorsTheme';
 
 export const HomeScreen = () => {
   const { characters, loadingCharacters } = useCharacter();
   const { loadginSeries, series } = useSeries();
   const { width } = useWindowDimensions();
 
-  const { isDark, theme } = useContext(ThemeContext);
+  const { colors } = useColorsTheme();
 
   const { top } = useSafeAreaInsets();
 
@@ -53,7 +52,7 @@ export const HomeScreen = () => {
         <View style={{ marginTop: top, flex: 1 }}>
           <View style={styles.container}>
             <View>
-              <Text style={styles.title}>Personajes</Text>
+              <Text style={[colors, styles.title]}>Personajes</Text>
               <Carousel
                 data={filterCharacters}
                 renderItem={({ item }: any) => <Poster data={item} />}
@@ -63,7 +62,7 @@ export const HomeScreen = () => {
               />
             </View>
             <View>
-              <Text style={styles.title}>Series</Text>
+              <Text style={[colors, styles.title]}>Series</Text>
               <Carousel
                 data={filterSeries}
                 renderItem={({ item }) => <Poster data={item} />}
@@ -88,10 +87,8 @@ const styles = StyleSheet.create({
   },
   title: {
     padding: 2,
-    backgroundColor: '#000',
     fontFamily: 'Montserrat-Black',
     width: '100%',
-    color: 'white',
     textTransform: 'uppercase',
     fontSize: 20,
     textAlign: 'center',

@@ -1,20 +1,23 @@
 import { Navigation } from './src/navigation/Navigation';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView } from 'react-native';
+import { SafeAreaView, useColorScheme } from 'react-native';
 import { Header } from './src/components';
-import { ThemeContextProvider } from './src/context/ThemeContext';
+import { NavigationContainer } from '@react-navigation/native';
+import { useColorsTheme } from './src/hooks/useColorsTheme';
 
 export default function App() {
+  const { colors, isDark } = useColorsTheme();
+
   return (
-    <ThemeContextProvider>
+    <NavigationContainer>
       <SafeAreaView
         style={{
-          backgroundColor: 'black',
+          backgroundColor: colors.backgroundColor,
         }}
       />
-      <StatusBar style="light" />
+      <StatusBar style={isDark ? 'light' : 'dark'} />
       <Header />
       <Navigation />
-    </ThemeContextProvider>
+    </NavigationContainer>
   );
 }
