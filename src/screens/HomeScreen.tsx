@@ -1,7 +1,6 @@
 import {
   ActivityIndicator,
   ScrollView,
-  StyleSheet,
   Text,
   View,
   useWindowDimensions,
@@ -9,26 +8,34 @@ import {
 import Carousel from 'react-native-snap-carousel';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useCharacter, useSeries } from '../hooks';
-import { useFonts } from 'expo-font';
 import { GradientBg, Poster } from '../components';
-import { useColorsTheme } from '../hooks/useColorsTheme';
+import { globalStyles } from '../theme/theme';
+import { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
+import { useFonts } from 'expo-font';
 
 export const HomeScreen = () => {
   const { characters, loadingCharacters } = useCharacter();
   const { loadginSeries, series } = useSeries();
   const { width } = useWindowDimensions();
-
-  const { colors } = useColorsTheme();
+  const { colors } = useContext(ThemeContext);
 
   const { top } = useSafeAreaInsets();
 
-  const [loaded] = useFonts({
+  const [fontsLoaded, fontError] = useFonts({
     'Montserrat-Black': require('../../assets/font/Montserrat-Black.ttf'),
   });
 
   if (loadingCharacters || loadginSeries) {
     return <ActivityIndicator size={30} color={'gray'} />;
   }
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
+
+  const backgroundColorTitle = colors.title === '#1d1d1d' ? '#1d1d1d' : '#eee';
+  const colorTitle = colors.title === '#1d1d1d' ? '#eee' : '#1d1d1d';
 
   const filterCharacters = characters.filter(
     (c) =>
@@ -42,17 +49,31 @@ export const HomeScreen = () => {
       'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available'
   );
 
-  if (!loaded) {
-    return null;
-  }
-
   return (
     <GradientBg>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-        <View style={{ marginTop: top, flex: 1 }}>
-          <View style={styles.container}>
+        <View
+          style={{
+            backgroundColor: colors.background,
+            marginTop: top,
+            flex: 1,
+            paddingBottom: 30,
+          }}
+        >
+          <View style={globalStyles.container}>
             <View>
-              <Text style={[colors, styles.title]}>Personajes</Text>
+              <Text
+                style={[
+                  {
+                    color: colorTitle,
+                    fontFamily: 'Montserrat-Black',
+                    backgroundColor: backgroundColorTitle,
+                  },
+                  globalStyles.title,
+                ]}
+              >
+                Personajes
+              </Text>
               <Carousel
                 data={filterCharacters}
                 renderItem={({ item }: any) => <Poster data={item} />}
@@ -62,7 +83,18 @@ export const HomeScreen = () => {
               />
             </View>
             <View>
-              <Text style={[colors, styles.title]}>Series</Text>
+              <Text
+                style={[
+                  {
+                    color: colorTitle,
+                    fontFamily: 'Montserrat-Black',
+                    backgroundColor: backgroundColorTitle,
+                  },
+                  globalStyles.title,
+                ]}
+              >
+                Series
+              </Text>
               <Carousel
                 data={filterSeries}
                 renderItem={({ item }) => <Poster data={item} />}
@@ -77,21 +109,3 @@ export const HomeScreen = () => {
     </GradientBg>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    rowGap: 20,
-    marginTop: 20,
-  },
-  title: {
-    padding: 2,
-    fontFamily: 'Montserrat-Black',
-    width: '100%',
-    textTransform: 'uppercase',
-    fontSize: 20,
-    textAlign: 'center',
-    marginBottom: 10,
-  },
-});

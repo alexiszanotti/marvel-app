@@ -31,6 +31,7 @@
     "react-native-screens": "~3.29.0",
     "react-native-snap-carousel": "4.0.0-beta.6",
     "react-native-svg": "14.1.0",
+    "react-native-switch-with-icons": "^3.0.1",
     "react-native-web": "~0.19.6",
     "react-navigation": "5.0.0",
     "typescript": "5.3.3"

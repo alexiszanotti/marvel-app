@@ -6,7 +6,7 @@ import {
   ProfileScreen,
 } from '../screens';
 import { Character } from '../interfaces/characterInterface';
-import { useColorsTheme } from '../hooks/useColorsTheme';
+import { globalStyles } from '../theme/theme';
 
 export type RootStackParams = {
   Home: undefined;
@@ -18,13 +18,12 @@ export type RootStackParams = {
 const Stack = createStackNavigator<RootStackParams>();
 
 export const Navigation = () => {
-  const { colors } = useColorsTheme();
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
         cardStyle: {
-          backgroundColor: colors.backgroundColor,
+          backgroundColor: 'white',
         },
       }}
       initialRouteName="Home"

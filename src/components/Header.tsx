@@ -1,34 +1,39 @@
 import { Pressable, StyleSheet, View } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { LogoMarvel } from './LogoMarvel';
-import { useColorsTheme } from '../hooks/useColorsTheme';
+import { SwitchTheme } from './SwitchTheme';
+import { useContext, useState } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
 
 export const Header = () => {
-  const { colors } = useColorsTheme();
+  const { currentTheme, setTheme, colors } = useContext(ThemeContext);
+  const [isEnable, setIsEnable] = useState(currentTheme === 'dark');
+
+  const onChangeTheme = (value: boolean) => {
+    setIsEnable(value);
+    setTheme(value ? 'dark' : 'light');
+  };
+
   return (
-    <View style={[colors, styles.headerContainer]}>
+    <View style={[{ backgroundColor: colors.background }, styles.container]}>
       <View>
         <Pressable onPress={() => {}}>
-          <Feather name="menu" size={30} color={colors.color} />
+          <Feather name="menu" size={30} color={colors.iconColors} />
         </Pressable>
       </View>
       <LogoMarvel />
       <View>
-        <Pressable onPress={() => {}}>
-          <FontAwesome name="search" size={30} color={colors.color} />
-        </Pressable>
+        <SwitchTheme isEnable={isEnable} onChange={onChangeTheme} />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  headerContainer: {
-    width: '100%',
-    height: 80,
-    justifyContent: 'space-around',
-    alignItems: 'center',
+  container: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 10,
   },
 });
