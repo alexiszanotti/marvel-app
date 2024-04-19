@@ -2,7 +2,6 @@ import { PropsWithChildren, createContext, useState } from 'react';
 import { ThemeColors, darkColors, ligthColors } from '../theme/theme';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
-import { Header } from '../components';
 import { SafeAreaView } from 'react-native';
 
 type ThemeColor = 'light' | 'dark';
@@ -40,7 +39,6 @@ export const ThemeProvider = ({ children }: PropsWithChildren) => {
           }}
         />
         <StatusBar style={currentTheme === 'light' ? 'dark' : 'light'} />
-        <Header />
         {children}
       </NavigationContainer>
     </ThemeContext.Provider>
