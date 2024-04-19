@@ -1,8 +1,9 @@
+import { useContext, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+
 import { LogoMarvel } from './LogoMarvel';
 import { SwitchTheme } from './SwitchTheme';
-import { useContext, useState } from 'react';
 import { ThemeContext } from '../context/ThemeContext';
 
 export const Header = () => {
